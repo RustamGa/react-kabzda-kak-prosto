@@ -5,10 +5,10 @@ export default {
     title: 'Input stories',
 
 }
-// export type InputPropsType = {
-//     value:string
-//     onClick:()=>void
-// }
+export type InputPropsType = {
+    value:string
+    onClick:()=>void
+}
 
 const Template: Story = (args) => <input {...args} />;
 
@@ -49,8 +49,52 @@ export const GetTrackValueUncontrolledInput = () => {
             <button onClick={save}>save
             </button>
             -actual value: {value}--</>
+}
+
+export const ControlledInput:Story<InputPropsType> = (args) => {
+    const [parentValue, setValue] = useState("")
+    const onChange=(e:ChangeEvent<HTMLInputElement>)=> {
+        setValue(e.currentTarget.value)
+    }
+
+    return (
+    <input {...args}
+        value = {parentValue}
+        onChange={onChange}
+    />
+    )
+}
+ControlledInput.args={
 
 }
+
+export const ControlledCheckBox = () => {
+
+    const [parentValue, setValue] = useState(true)
+    const onChange=(e:ChangeEvent<HTMLInputElement>)=> {
+        setValue (e.currentTarget.checked)
+    }
+    return (
+        <input type={"checkBox"} checked={parentValue} onChange={onChange}/>
+    )
+}
+export const ControlledSelected = () => {
+
+    const [parentValue, setValue] = useState<string | undefined >("3")
+    const onChange=(e:ChangeEvent<HTMLSelectElement>)=> {
+        setValue (e.currentTarget.value)
+    }
+    return (
+        <select value={parentValue} onChange={onChange}>
+            <option>none</option>
+            <option value ={"1"}> Minsk</option>
+            <option value ={"2"}> Kiev</option>
+            <option value ={"3"}> Moscow</option>
+        </select>
+    )
+}
+
+
 
 
 

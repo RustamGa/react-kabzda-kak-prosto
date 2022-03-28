@@ -5,7 +5,7 @@ import {action} from "@storybook/addon-actions";
 import {Meta} from '@storybook/react';
 
 export default {
-    title: 'Accordion stories',
+    title: 'components/Accordion stories',
     component: Accordion,
 } as Meta
 

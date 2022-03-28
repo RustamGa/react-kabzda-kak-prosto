@@ -8,12 +8,15 @@ import {action} from "@storybook/addon-actions";
 export default {
     title: 'OnOff stories',
     component: OnOff,
-}
+} as ComponentMeta<typeof OnOff>
+
 const callBack = action("on or off clicked")
 
-const Template: Story<OnOffPropsType> = (args) => <OnOff {...args} />;
+const Template: Story<OnOffPropsType> = (args) => <OnOff {...args} />; // функция для удобстава прокидывания
+// пропсов
 
 export const OnMode = Template.bind({});
+//
 OnMode.args = {
     on: true,
     onChange: callBack

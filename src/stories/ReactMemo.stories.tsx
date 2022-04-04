@@ -6,19 +6,14 @@ export default {
     title: 'React.memo demo',
 } as Meta
 
-export const NewMessagesCounter = (props:{count:number}) => {
 
-    return <div>
-        {props.count}
-    </div>
-}
 
 type UsersType ={
     users:Array<string>
 }
 
 export const UsersSecret = (props:UsersType ) => {
-    console.log(props.users)
+
     return <div>
         {props.users.map((u,i)=> <div key={i}>{u}</div>)}
     </div>
@@ -32,6 +27,12 @@ export const Example1 = () => {
     const addUsers = () => {
         const newUsers = [...users, "Sveta" + new Date().getTime()]
         setUsers(newUsers)
+    }
+    const NewMessagesCounter = (props:{count:number}) => {
+
+        return <div>
+            {props.count}
+        </div>
     }
 
 return (

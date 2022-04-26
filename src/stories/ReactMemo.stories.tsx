@@ -20,6 +20,7 @@ export const UsersSecret = (props:UsersType ) => {
 }
 
 const Users = React.memo(UsersSecret)
+
 export const Example1 = () => {
 
     const [users, setUsers]= useState(["Vova", "Kolya", "Olga"])

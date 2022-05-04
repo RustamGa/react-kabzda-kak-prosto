@@ -53,6 +53,69 @@ SimpleExample.args={
 
 }
 
+export const SetTimeoutExample:Story<PropsType> = (args) => {
+
+    const [count, setCount] = useState(1)
+    const [fake, setFake] = useState(1)
+
+    console.log('SimpleExample')
+
+    ;
+    //
+    useEffect(()=>{
+        setTimeout(()=>{
+
+            console.log('setTimeout')
+            document.title=count.toString();
+        }, 1000)
+    },[count])
+
+    return (
+        <div>
+            <Button {...args} onClick={() => setCount(count+1)}/>
+            <Button {...args} onClick={() => setFake(fake+1)}/>
+            {/*<button onClick={()=>setCount(countIncrease)}>+</button>*/}
+            <NewMessagesCounter {...args} count={count} fake={fake}/>
+        </div>
+    )
+}
+
+SetTimeoutExample.args={
+    value:'+',
+    message:'Hello',
+}
+
+export const SetIntervalExample:Story<PropsType> = (args) => {
+
+    const [count, setCount] = useState(1)
+    const [fake, setFake] = useState(1)
+
+    console.log('SimpleExample')
+
+    ;
+    //
+    useEffect(()=>{
+        setInterval(()=>{
+            console.log('tick'+count)
+            setCount((state)=>state+1)
+        }, 1000)
+    },[])
+
+    return (
+        <div>
+            {/*<Button {...args} onClick={() => setCount(count+1)}/>*/}
+            {/*<Button {...args} onClick={() => setFake(fake+1)}/>*/}
+            {/*<button onClick={()=>setCount(countIncrease)}>+</button>*/}
+            <NewMessagesCounter {...args} count={count} fake={fake}/>
+        </div>
+    )
+}
+
+SetIntervalExample.args={
+    value:'+',
+    message:'Hello',
+}
+
 //
 // export const Example1 = () => {
 //     console.log('Example1')

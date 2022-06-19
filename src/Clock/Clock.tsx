@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {setInterval} from "timers";
-import s from "./Clock.module.css";
+// import "./AnalogClockView.css";
+
+import {DigitalClockView} from "./DigitalClockView";
+import {AnalogClockView} from "./AnalogClockView";
 
 export type PropsType = {
     value: string
+    mode: 'DIGITAL' | 'ANALOG'
 }
 
 function Clock(props: PropsType) {
@@ -14,28 +18,32 @@ function Clock(props: PropsType) {
             console.log("TICK")
             setDate(new Date())
         }, 1000)
-        return () =>
-        {
+        return () => {
             clearInterval(intervalID)
         }
     }, [])
 
-    const getTwoDigitsString = (date: number) => date < 10 ? '0' + date : date
 
+    let view;
 
-    const seconds = getTwoDigitsString(date.getSeconds())
-    const minutes = getTwoDigitsString(date.getMinutes())
-    const hours = getTwoDigitsString(date.getHours())
+    switch (props.mode) {
+        case "ANALOG":
+            view = <AnalogClockView date={date} value={'ANALOG'} />
+            break;
+        case "DIGITAL":
+        default:
+            view = <DigitalClockView date={date} value={'DIGITAL'}/>
+    }
 
     return <div>
-        <div>{props.value}</div>
-        <span>{hours}
-        </span>:
-        <span>{minutes}
-        </span>:
-        <span>{seconds}
-        </span>
+        {view}
     </div>
 }
+
+export type ClockViewType = {
+    date: Date
+    value: string
+}
+
 
 export default Clock

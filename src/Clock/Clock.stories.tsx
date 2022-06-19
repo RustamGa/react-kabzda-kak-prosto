@@ -11,19 +11,37 @@ export default {
 } as Meta
 
 type PropsType = {
-value:string
+    value: string
+    mode: 'DIGITAL' | 'ANALOG'
 }
 
-export const BaseExample: Story<PropsType> = (args) => {
+export const BaseDigitalExample: Story<PropsType> = (args) => {
 
     return (
-        <div >
+        <div>
             <Clock {...args} />
         </div>
     )
 }
 
-BaseExample.args = {
-    value: 'TIME'
+
+BaseDigitalExample.args = {
+    value: 'TIME',
+    mode: 'DIGITAL'
+
+}
+export const BaseAnalogExample: Story<PropsType> = (args) => {
+
+    return (
+        <div>
+            <Clock {...args} />
+        </div>
+    )
+}
+
+
+BaseAnalogExample.args = {
+    value: 'TIME',
+    mode: 'ANALOG'
 
 }

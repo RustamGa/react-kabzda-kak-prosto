@@ -169,24 +169,82 @@ SetIntervalClockExample.args = {
     message: 'Time',
 }
 
+export const ResetEffectExample: Story<PropsType> = (args) => {
 
-//
-// export const Example1 = () => {
-//     console.log('Example1')
-//     // let initialValue = useMemo(generateData, [])
-//     const [count, setCount]=useState(generateData)
-//
-//     let countIncrease = (state:number) => {
-//         return state+1
-//     }
-//
-//
-//
-// return (
-//     <div>
-//         <button onClick={()=>setCount(countIncrease)}>+</button>
-//     <NewMessagesCounter count={count}/>
-//
-//     </div>
-// )
-// }
+    const [count, setCount] = useState(1)
+
+    console.log('Component rendered:'+count);
+    //
+    useEffect(() => {
+            console.log('Effect occurred:' + count)
+        return () => {
+                console.log('Reset effect'+count)
+            }
+        }
+    , [count])
+const increase = () => {
+    setCount(count + 1)
+}
+    return (
+        <div>
+            Hello, counter: {count}
+            <Button {...args} onClick={increase}/>
+            {/*<button onClick={()=>setCount(countIncrease)}>+</button>*/}
+        </div>
+    )
+}
+
+ResetEffectExample.args = {
+    value: '+',
+}
+
+export const KeysTrackerExample: Story<PropsType> = (args) => {
+
+    const [text, setText] = useState('')
+
+    console.log('Component rendered:'+text);
+    //
+    useEffect(() => {
+        const handler = (e:KeyboardEvent) => {
+                console.log(e.code)
+                setText(text + e.key)
+            }
+        window.addEventListener('keypress', handler)
+    return () => {
+        window.removeEventListener('keypress', handler)
+    }
+    }, [text])
+    return (
+        <div>
+            Typed text: {text}
+        </div>
+    )
+}
+KeysTrackerExample.args = {
+
+}
+
+export const SetTimoutExample: Story<PropsType> = (args) => {
+
+    const [text, setText] = useState('')
+
+    console.log('Component rendered:'+text);
+    //
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+          setText('3 second passed')
+        }, 3000)
+
+        return () => {
+            clearTimeout(timeoutId)
+        }
+    }, [text])
+    return (
+        <div>
+            Typed text: {text}
+        </div>
+    )
+}
+SetTimoutExample.args = {
+
+}
